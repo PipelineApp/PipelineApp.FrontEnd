@@ -1,0 +1,37 @@
+.landing-page {
+    >.container {
+        padding: 60px;
+    }
+    .content-bg-wrap:before {
+        background-color: $base-primary;
+        opacity: 0.5;
+    }
+    .content-bg-wrap {
+        background-image: url("/img/landing.jpg");
+        background-position: 0 0;
+        background-repeat: repeat;
+        -webkit-animation: none;
+        animation: none;
+        background-size: auto;
+    }
+    .landing-content {
+        background: $black;
+        opacity: 0.8;
+        padding: 30px;
+        border-radius: 5px;
+        >p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+    }
+    .registration-login-form {
+        padding-left: 0;
+        min-height: 0;
+        .checkbox {
+            input[type=checkbox] {
+                opacity: 1;
+            }
+            font-size: 0.875rem;
+        }
+    }
+}

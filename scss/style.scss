@@ -3,4 +3,6 @@
 // Import core styles
 @import "core";
 // Custom styles
+@import 'variables';
+@import 'components/overrides';
 @import "global";

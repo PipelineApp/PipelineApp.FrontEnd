@@ -10,7 +10,7 @@ import history from './utility/history';
 // import * as actions from './infrastructure/actions';
 import LandingContainer from './display/containers/LandingContainer';
 import LayoutContainer from './display/containers/LayoutContainer';
-import MaintenanceContainer from './display/containers/MaintenanceContainer'
+import MaintenanceContainer from './display/containers/MaintenanceContainer';
 
 const propTypes = {
 	isMaintenanceMode: PropTypes.bool.isRequired
