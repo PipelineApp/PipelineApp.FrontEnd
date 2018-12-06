@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jest verification should render valid snapshot 1`] = `
+Object {
+  "testProp1": "test",
+  "testProp2": 124251234,
+}
+`;
