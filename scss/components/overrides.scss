@@ -1,0 +1,12 @@
+a {
+    color: $base-primary;
+}
+
+.btn-primary {
+    background: $base-primary;
+    border: 1px solid $dark-primary;
+    &:hover {
+        background: $base-secondary;
+        border: 1px solid $light-secondary;
+    }
+}
