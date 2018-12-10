@@ -38,7 +38,7 @@ module.exports = merge(common, {
 		]
 	},
 	plugins: [
-		new webpack.DefinePlugin(utils.generateDefineConfig(true)),
+		new webpack.DefinePlugin(utils.generateDefineConfig(false)),
 		extractCSS,
 		extractSCSS,
 		new webpack.HotModuleReplacementPlugin()

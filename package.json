@@ -122,6 +122,7 @@
 		"jquery": "^3.3.1",
 		"local-storage": "^1.4.2",
 		"lodash": "^4.17.11",
+		"moment": "^2.22.2",
 		"promise": "^8.0.2",
 		"prop-types": "^15.6.2",
 		"query-string": "^6.2.0",

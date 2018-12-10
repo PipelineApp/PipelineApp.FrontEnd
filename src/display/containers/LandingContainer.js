@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	Label, Container, Row, Col
 } from 'reactstrap';
+import moment from 'moment';
 import Auth0Lock from 'auth0-lock';
 import withPageViewTracker from '../../infrastructure/withPageViewTracker';
 
@@ -13,6 +14,16 @@ class Landing extends React.Component {
 			allowShowPassword: true,
 			allowedConnections: ['Username-Password-Authentication'],
 			autoclose: true,
+			additionalSignUpFields: [{
+				type: 'date',
+				name: 'dob',
+				placeholder: 'date of birth (mm/dd/yyyy)',
+				validator: dob => ({
+					valid: moment(dob, 'MM/DD/YYYY', true).isValid(),
+					hint: 'You must enter a valid date.'
+				}),
+				icon: '/img/calendar.png'
+			}],
 			auth: {
 				redirectUrl: PIPELINE_AUTH0_CALLBACK_URL,
 				responseType: 'token id_token',
@@ -23,7 +34,8 @@ class Landing extends React.Component {
 			avatar: null,
 			languageDictionary: {
 				emailInputPlaceholder: 'you@youremail.com',
-				title: 'Join Pipeline'
+				title: 'Log In',
+				signUpTitle: 'Join Pipeline'
 			},
 			container: 'auth0-widget-container',
 			theme: {
