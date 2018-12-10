@@ -8,13 +8,13 @@ import withPageViewTracker from '../../infrastructure/withPageViewTracker';
 class Landing extends React.Component {
 	constructor() {
 		super();
-		this.lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
+		this.lock = new Auth0Lock(PIPELINE_AUTH0_CLIENT_ID, PIPELINE_AUTH0_DOMAIN, {
 			allowAutocomplete: true,
 			allowShowPassword: true,
 			allowedConnections: ['Username-Password-Authentication'],
 			autoclose: true,
 			auth: {
-				redirectUrl: AUTH0_CALLBACK_URL,
+				redirectUrl: PIPELINE_AUTH0_CALLBACK_URL,
 				responseType: 'token id_token',
 				params: {
 					scope: 'openid'
@@ -22,8 +22,8 @@ class Landing extends React.Component {
 			},
 			avatar: null,
 			languageDictionary: {
-				emailInputPlaceholder: "you@youremail.com",
-				title: "Join Pipeline"
+				emailInputPlaceholder: 'you@youremail.com',
+				title: 'Join Pipeline'
 			},
 			container: 'auth0-widget-container',
 			theme: {
@@ -33,9 +33,11 @@ class Landing extends React.Component {
 			initialScreen: 'signUp'
 		});
 	}
+
 	componentDidMount() {
 		this.lock.show();
 	}
+
 	render() {
 		return (
 			<div className="landing-page">
@@ -48,15 +50,15 @@ class Landing extends React.Component {
 								<p>
 									Join a community of fans, writers, artists, and other creators{' '}
 									building a bigger, more interesting internet every day.
-						</p>
+								</p>
 								<p>
 									Switch between &quot;Pipes&quot; of content you follow based on what{' '}
 									interests you.
-						</p>
+								</p>
 								<p>
 									Post under as many personas as you want -- artist, RP character, science geek,
 									news blog, or even just your own thoughts on the world.
-						</p>
+								</p>
 							</div>
 						</Col>
 

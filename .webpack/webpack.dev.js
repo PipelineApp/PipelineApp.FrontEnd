@@ -4,7 +4,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.common.js');
 const utils = require('./utils');
-const config = require('../.config/config.dev.json');
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 
@@ -39,7 +38,7 @@ module.exports = merge(common, {
 		]
 	},
 	plugins: [
-		new webpack.DefinePlugin(utils.generateDefineConfig(config)),
+		new webpack.DefinePlugin(utils.generateDefineConfig(true)),
 		extractCSS,
 		extractSCSS,
 		new webpack.HotModuleReplacementPlugin()

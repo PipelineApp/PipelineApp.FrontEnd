@@ -4,7 +4,6 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.common.js');
 const utils = require('./utils');
-const config = require('../.config/config.staging.json');
 
 const extractCSS = new MiniCssExtractPlugin({ filename: '[name].fonts.css' });
 const extractSCSS = new MiniCssExtractPlugin({ filename: '[name].styles.css' });
@@ -27,7 +26,7 @@ module.exports = merge(common, {
 		]
 	},
 	plugins: [
-		new webpack.DefinePlugin(utils.generateDefineConfig(config)),
+		new webpack.DefinePlugin(utils.generateDefineConfig(true)),
 		extractCSS,
 		extractSCSS,
 		new CompressionPlugin()
