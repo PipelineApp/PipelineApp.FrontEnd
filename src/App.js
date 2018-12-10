@@ -11,6 +11,7 @@ import history from './utility/history';
 import LandingContainer from './display/containers/LandingContainer';
 import LayoutContainer from './display/containers/LayoutContainer';
 import MaintenanceContainer from './display/containers/MaintenanceContainer';
+import AuthCallbackContainer from './display/containers/AuthCallbackContainer';
 
 const propTypes = {
 	isMaintenanceMode: PropTypes.bool.isRequired
@@ -45,6 +46,11 @@ const App = (props) => {
 				{
 					['/login', '/forgotpassword', '/resetpassword', '/register'].map(path => <Route key={path} path={path} component={LandingContainer} />)
 				}
+				<Route
+					path="/auth-callback"
+					name="Auth Callback"
+					component={AuthCallbackContainer}
+				/>
 				<Route component={LayoutContainer} />
 			</Switch>
 		</Router>
