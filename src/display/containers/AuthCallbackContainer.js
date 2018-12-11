@@ -1,10 +1,14 @@
 import React from 'react';
-import {
-	Label, Container, Row, Col
-} from 'reactstrap';
+import { connect } from 'react-redux';
 
-const AuthCallbackContainer = () => (
-	<span>Callback</span>
-);
+class AuthCallbackContainer extends React.Component {
+	componentDidMount() {
+		console.log(this.props.location);
+	}
 
-export default AuthCallbackContainer;
+	render() {
+		return (<span />);
+	}
+}
+
+export default connect()(AuthCallbackContainer);

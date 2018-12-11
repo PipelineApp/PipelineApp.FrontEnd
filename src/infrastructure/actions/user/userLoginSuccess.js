@@ -1,9 +1,10 @@
 import analytics from '../../constants/analytics';
 
-export const SUBMIT_USER_LOGIN = 'SUBMIT_USER_LOGIN';
-export function submitUserLogin() {
+export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
+export function userLoginSuccess(data) {
 	return {
-		type: SUBMIT_USER_LOGIN,
+		type: USER_LOGIN_SUCCESS,
+		data,
 		analytics: {
 			func: analytics.funcs.EVENT,
 			event: {

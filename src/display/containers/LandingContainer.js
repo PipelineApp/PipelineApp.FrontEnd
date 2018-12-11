@@ -1,53 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
-	Label, Container, Row, Col
+	Container, Row, Col
 } from 'reactstrap';
-import moment from 'moment';
-import Auth0Lock from 'auth0-lock';
+import * as actions from '../../infrastructure/actions';
 import withPageViewTracker from '../../infrastructure/withPageViewTracker';
 
-class Landing extends React.Component {
-	constructor() {
-		super();
-		this.lock = new Auth0Lock(PIPELINE_AUTH0_CLIENT_ID, PIPELINE_AUTH0_DOMAIN, {
-			allowAutocomplete: true,
-			allowShowPassword: true,
-			allowedConnections: ['Username-Password-Authentication'],
-			autoclose: true,
-			additionalSignUpFields: [{
-				type: 'date',
-				name: 'dob',
-				placeholder: 'date of birth (mm/dd/yyyy)',
-				validator: dob => ({
-					valid: moment(dob, 'MM/DD/YYYY', true).isValid(),
-					hint: 'You must enter a valid date.'
-				}),
-				icon: '/img/calendar.png'
-			}],
-			auth: {
-				redirectUrl: PIPELINE_AUTH0_CALLBACK_URL,
-				responseType: 'token id_token',
-				params: {
-					scope: 'openid'
-				}
-			},
-			avatar: null,
-			languageDictionary: {
-				emailInputPlaceholder: 'you@youremail.com',
-				title: 'Log In',
-				signUpTitle: 'Join Pipeline'
-			},
-			container: 'auth0-widget-container',
-			theme: {
-				logo: '/img/logo.png',
-				primaryColor: '#34025d'
-			},
-			initialScreen: 'signUp'
-		});
-	}
+const propTypes = {
+	showAuth0Lock: PropTypes.func.isRequired
+};
+const mapStateToProps = state => state;
 
+class Landing extends React.Component {
 	componentDidMount() {
-		this.lock.show();
+		const { showAuth0Lock } = this.props;
+		showAuth0Lock();
 	}
 
 	render() {
@@ -83,5 +51,7 @@ class Landing extends React.Component {
 		);
 	}
 }
-
-export default withPageViewTracker(Landing);
+Landing.propTypes = propTypes;
+export default connect(mapStateToProps, {
+	showAuth0Lock: actions.showAuth0Lock
+})(withPageViewTracker(Landing));
