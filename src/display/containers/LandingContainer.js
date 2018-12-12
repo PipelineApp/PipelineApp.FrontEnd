@@ -1,21 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import {
 	Container, Row, Col
 } from 'reactstrap';
-import * as actions from '../../infrastructure/actions';
 import withPageViewTracker from '../../infrastructure/withPageViewTracker';
+import { getLock } from '../../utility';
 
-const propTypes = {
-	showAuth0Lock: PropTypes.func.isRequired
-};
+const propTypes = {};
 const mapStateToProps = state => state;
 
 class Landing extends React.Component {
 	componentDidMount() {
-		const { showAuth0Lock } = this.props;
-		showAuth0Lock();
+		const lock = getLock();
+		lock.show();
 	}
 
 	render() {
@@ -52,6 +49,4 @@ class Landing extends React.Component {
 	}
 }
 Landing.propTypes = propTypes;
-export default connect(mapStateToProps, {
-	showAuth0Lock: actions.showAuth0Lock
-})(withPageViewTracker(Landing));
+export default connect(mapStateToProps)(withPageViewTracker(Landing));

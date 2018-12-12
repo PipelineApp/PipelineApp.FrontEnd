@@ -1,2 +1,2 @@
-// eslint-disable-next-line
 export { default as getQuery } from './getQuery';
+export { default as getLock } from './getLock';

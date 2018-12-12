@@ -1,10 +1,7 @@
-import Auth0Lock from 'auth0-lock';
 import moment from 'moment';
-import { takeEvery } from 'redux-saga';
-import { SHOW_AUTH0_LOCK } from '../../actions';
+import Auth0Lock from 'auth0-lock';
 
-
-function* showAuth0Lock() {
+export default function getLock() {
 	const lock = new Auth0Lock(PIPELINE_AUTH0_CLIENT_ID, PIPELINE_AUTH0_DOMAIN, {
 		allowAutocomplete: true,
 		allowShowPassword: true,
@@ -40,9 +37,5 @@ function* showAuth0Lock() {
 		},
 		initialScreen: 'signUp'
 	});
-	lock.show();
-}
-
-export default function* showAuth0LockSaga() {
-	yield takeEvery(SHOW_AUTH0_LOCK, showAuth0Lock);
+	return lock;
 }
