@@ -1,10 +1,14 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import withPageViewTracker from '../../infrastructure/withPageViewTracker';
+import Dashboard from '../views/dashboard/Dashboard';
 
-const Maintenance = () => (
-	<div className="app flex-row align-items-center">
-		Layout
+const Layout = () => (
+	<div>
+		<Switch>
+			<Route path="/dashboard" name="Dashboard" component={Dashboard} />
+		</Switch>
 	</div>
 );
 
-export default withPageViewTracker(Maintenance);
+export default withPageViewTracker(Layout);

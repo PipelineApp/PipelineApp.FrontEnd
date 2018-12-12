@@ -21,6 +21,6 @@ class AuthCallbackContainer extends React.Component {
 	}
 }
 AuthCallbackContainer.propTypes = propTypes;
-export default connect(() => { }, {
+export default connect(() => ({}), {
 	userLoginSuccess: actions.userLoginSuccess
 })(AuthCallbackContainer);

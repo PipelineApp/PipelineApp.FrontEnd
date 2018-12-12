@@ -44,7 +44,7 @@ const App = (props) => {
 					component={MaintenanceContainer}
 				/>
 				{
-					['/login', '/forgotpassword', '/resetpassword', '/register'].map(path => <Route key={path} path={path} component={LandingContainer} />)
+					['/landing', '/'].map(path => <Route exact key={path} path={path} component={LandingContainer} />)
 				}
 				<Route
 					path="/auth-callback"
