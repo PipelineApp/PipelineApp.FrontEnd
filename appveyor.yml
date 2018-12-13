@@ -1,11 +1,16 @@
 -
+  branches:
+    only:
+    - development
   version: '1.0.{build}'
   image: ubuntu
   environment:
     nodejs_version: "10"
-  branches:
-    only:
-    - development
+    PIPELINE_AUTH0_DOMAIN: pipelineapp-dev.auth0.com
+    PIPELINE_AUTH0_CALLBACK_URL: https://pipeline-frontend-staging.azurewebsites.net/auth-callback
+    PIPELINE_AUTH0_CLIENT_ID: NkLKSyxgB8gIkYc3NiBzOf7T47F8o6sH
+    PIPELINE_AUTH0_AUDIENCE: https://pipeline-backend-staging.azurewebsites.net
+    PIPELINE_BACKEND_API_HOST: https://pipeline-backend-staging.azurewebsites.net
   init:
     - sh: git config --global core.autocrlf input
     - sh: git config --global core.eol lf 
@@ -37,13 +42,18 @@
     - ps: Invoke-RestMethod https://raw.githubusercontent.com/blackjackkent/appveyor-discord-webhook/master/send.ps1 -o send.ps1
     - ps: ./send.ps1 failure $env:WEBHOOK_URL
 -
+  branches:
+    only:
+    - production
   version: '1.0.{build}'
   image: ubuntu
   environment:
     nodejs_version: "10"
-  branches:
-    only:
-    - production
+    PIPELINE_AUTH0_DOMAIN: pipelineapp.auth0.com
+    PIPELINE_AUTH0_CALLBACK_URL: https://www.pipeline-app.net/auth-callback
+    PIPELINE_AUTH0_CLIENT_ID: nfjuYft03FsY9r2ouve9irrrRfogF3cj
+    PIPELINE_AUTH0_AUDIENCE: https://pipeline-backend.azurewebsites.net
+    PIPELINE_BACKEND_API_HOST: https://pipeline-backend.azurewebsites.net
   init:
     - sh: git config --global core.autocrlf input
     - sh: git config --global core.eol lf 

@@ -5,7 +5,7 @@ import { FETCH_USER, fetchedUserSuccess, fetchedUserFailure } from '../../action
 
 function* fetchUser() {
 	try {
-		const response = yield call(axios.get, `${PIPELINE_BACKEND_API_HOST}api/private`);
+		const response = yield call(axios.get, `${PIPELINE_BACKEND_API_HOST}/api/private`);
 		yield put(fetchedUserSuccess(response.data));
 	} catch (e) {
 		yield put(fetchedUserFailure());
