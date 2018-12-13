@@ -22,6 +22,9 @@ class Landing extends React.Component {
 				<Container>
 					<Row>
 						<Col lg="6" xs="12">
+							<div id="auth0-widget-container" />
+						</Col>
+						<Col lg="6" xs="12">
 							<div className="landing-content">
 								<h1>Follow Your Interests Your Way</h1>
 								<p>
@@ -37,10 +40,6 @@ class Landing extends React.Component {
 									news blog, or even just your own thoughts on the world.
 								</p>
 							</div>
-						</Col>
-
-						<Col lg="6" xs="12">
-							<div id="auth0-widget-container" />
 						</Col>
 					</Row>
 				</Container>

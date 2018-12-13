@@ -1,5 +1,6 @@
 import axios from 'axios';
 import promise from 'promise';
+import auth0 from 'auth0-js';
 import cache from './cache';
 import cacheKeys from './constants/cacheKeys';
 import { SUBMIT_USER_LOGOUT, SET_MAINTENANCE_MODE_ON } from './actions';
@@ -8,6 +9,14 @@ const whitelist = [
 	'api/auth'
 ];
 const refreshSubscribers = [];
+const auth0Lib = new auth0.WebAuth({
+	domain: PIPELINE_AUTH0_DOMAIN,
+	clientID: PIPELINE_AUTH0_CLIENT_ID,
+	redirectUri: PIPELINE_AUTH0_CALLBACK_URL,
+	audience: PIPELINE_AUTH0_AUDIENCE,
+	responseType: 'token id_token',
+	scope: 'openid profile'
+});
 let isRefreshing = false;
 
 function isPathInWhitelist(url) {
@@ -19,16 +28,18 @@ function subscribeTokenRefresh(cb) {
 function onTokenRefreshed(token) {
 	refreshSubscribers.map(cb => cb(token));
 }
-function refreshAccessToken(error) {
-	return axios
-		.post(`${API_BASE_URL}/api/auth/refresh`, { RefreshToken: cache.get(cacheKeys.REFRESH_TOKEN) })
-		.then(({ data }) => {
-			cache.set(cacheKeys.ACCESS_TOKEN, data.token.token);
-			cache.set(cacheKeys.REFRESH_TOKEN, data.refreshToken.token);
-		})
-		.catch(() => {
-			throw error;
+function refreshAccessToken(error, store) {
+	try {
+		auth0Lib.checkSession({}, (err, authResult) => {
+			if (authResult && authResult.accessToken && authResult.idToken) {
+				cache.set(cacheKeys.ACCESS_TOKEN, authResult.accessToken);
+			} else {
+				store.dispatch({ type: SUBMIT_USER_LOGOUT });
+			}
 		});
+	} catch (e) {
+		store.dispatch({ type: SUBMIT_USER_LOGOUT });
+	}
 }
 function setAuthHeader(config) {
 	if (isPathInWhitelist(config.url)) {
@@ -43,11 +54,11 @@ function setAuthHeader(config) {
 	}
 	return config;
 }
-function handleUnauthorizedRequest(error, originalRequest) {
+function handleUnauthorizedRequest(error, originalRequest, store) {
 	// start token refresh if it isn't already in process
 	if (!isRefreshing) {
 		isRefreshing = true;
-		refreshAccessToken(error)
+		refreshAccessToken(error, store)
 			.then(() => {
 				isRefreshing = false;
 				onTokenRefreshed();
@@ -73,16 +84,12 @@ export default {
 		axios.interceptors.request.use(setAuthHeader, error => promise.reject(error));
 		axios.interceptors.response.use(response => response, (error) => {
 			const { config } = error;
-			if (error.response.status === 498) {
-				store.dispatch({ type: SUBMIT_USER_LOGOUT });
-				return Promise.reject(error);
-			}
 			if (error.response.status === 503) {
 				store.dispatch({ type: SET_MAINTENANCE_MODE_ON });
 				return Promise.reject(error);
 			}
 			if (error.response.status === 401 && !isPathInWhitelist(error.config.url)) {
-				return handleUnauthorizedRequest(error, config);
+				return handleUnauthorizedRequest(error, config, store);
 			}
 			return Promise.reject(error);
 		});

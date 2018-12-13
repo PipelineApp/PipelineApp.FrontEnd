@@ -24,14 +24,14 @@
             margin-bottom: 20px;
         }
     }
-    .registration-login-form {
-        padding-left: 0;
-        min-height: 0;
-        .checkbox {
-            input[type=checkbox] {
-                opacity: 1;
-            }
-            font-size: 0.875rem;
-        }
+    .auth0-lock.auth0-lock.auth0-lock-opened-in-frame,
+    .auth0-lock.auth0-lock.auth0-lock-opened-in-frame .auth0-lock-widget {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+    .landing-content,
+    .auth0-lock-widget {
+        height: 450px;
     }
 }

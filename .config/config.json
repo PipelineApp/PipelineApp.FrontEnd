@@ -1,5 +1,7 @@
 {
 	"PIPELINE_AUTH0_DOMAIN": "pipelineapp-dev.auth0.com",
 	"PIPELINE_AUTH0_CLIENT_ID": "NkLKSyxgB8gIkYc3NiBzOf7T47F8o6sH",
-	"PIPELINE_AUTH0_CALLBACK_URL": "http://localhost:8080/auth-callback"
+	"PIPELINE_AUTH0_CALLBACK_URL": "http://localhost:8080/auth-callback",
+	"PIPELINE_AUTH0_AUDIENCE": "https://pipelineapp-backend-dev.azurewebsites.net",
+	"PIPELINE_BACKEND_API_HOST": "https://localhost:44348/"
 }

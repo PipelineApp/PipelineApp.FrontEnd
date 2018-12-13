@@ -43,9 +43,11 @@ const App = (props) => {
 					name="Maintenance"
 					component={MaintenanceContainer}
 				/>
-				{
-					['/landing', '/'].map(path => <Route exact key={path} path={path} component={LandingContainer} />)
-				}
+				<Route
+					path="/landing"
+					name="Landing"
+					component={LandingContainer}
+				/>
 				<Route
 					path="/auth-callback"
 					name="Auth Callback"

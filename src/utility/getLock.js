@@ -19,6 +19,7 @@ export default function getLock() {
 		}],
 		auth: {
 			redirectUrl: PIPELINE_AUTH0_CALLBACK_URL,
+			audience: PIPELINE_AUTH0_AUDIENCE,
 			responseType: 'token id_token',
 			params: {
 				scope: 'openid'

@@ -5,10 +5,11 @@
 		"jest": true
 	},
 	"globals": {
-		"API_BASE_URL": false,
 		"PIPELINE_AUTH0_DOMAIN": false,
 		"PIPELINE_AUTH0_CLIENT_ID": false,
 		"PIPELINE_AUTH0_CALLBACK_URL": false,
+		"PIPELINE_BACKEND_API_HOST": false,
+		"PIPELINE_AUTH0_AUDIENCE": false,
 		"page": true,
 		"browser": true
 	},

@@ -6,7 +6,9 @@ import Dashboard from '../views/dashboard/Dashboard';
 const Layout = () => (
 	<div>
 		<Switch>
-			<Route path="/dashboard" name="Dashboard" component={Dashboard} />
+			{
+				['/dashboard', '/'].map(path => <Route exact key={path} path={path} component={Dashboard} />)
+			}
 		</Switch>
 	</div>
 );
